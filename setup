@@ -149,6 +149,21 @@ check_port() {
 }
 
 ##
+## read a variable from the config file
+##
+read_config() {
+  config_line=`egrep "^  #?$1:" $web_file`
+  read_config_result=`echo $config_line | awk  -F":" '{print $2}'`
+  read_config_result=`echo $read_config_result | sed "s/^\([\"']\)\(.*\)\1\$/\2/g"`
+}
+
+read_default() {
+  config_line=`egrep "^  #?$1:" samples/standalone.yml`
+  read_default_result=`echo $config_line | awk  -F":" '{print $2}'`
+  read_default_result=`echo $read_config_result | sed "s/^\([\"']\)\(.*\)\1\$/\2/g"`
+}
+
+##
 ## If we have lots of RAM or lots of CPUs, bump up the defaults to scale better
 ##
 scale_ram_and_cpu() {
