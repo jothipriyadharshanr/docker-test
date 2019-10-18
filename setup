@@ -230,11 +230,17 @@ if [ "$1" == "2container" ]
 then
     app_name=web_only
     data_name=data
+    web_template=samples/web_only.yml
+    data_template=samples/data.yml
     web_file=containers/$app_name.yml
+    data_file=containers/$data_name.yml
 else
   app_name=app
   data_name=app
+  web_template=samples/standalone.yml
+  data_template=""
   web_file=containers/$app_name.yml
+  data_file=containers/$app_name.yml
 fi
     changelog=/tmp/changelog
 
@@ -262,7 +268,7 @@ then
   echo
 else
   check_ports
-  cp -v $web_file
+  cp -v $web_template $web_file
   if [ "$data_name" == "data" ]
   then
       echo "--------------------------------------------------"
