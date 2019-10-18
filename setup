@@ -206,9 +206,9 @@ scale_ram_and_cpu() {
   # UWSGI_WORKERS: 2 * GB for 2GB or less, or 2 * CPU, max 8
   if [ "$avail_gb" -le "2" ]
   then
-    uwsgi_workers = $(( 2 * $avail_gb ))
+    uwsgi_workers=$(( 2 * $avail_gb ))
   else
-    uwsgi_workers = $(( 2 * $avail_cores ))
+    uwsgi_workers=$(( 2 * $avail_cores ))
   fi
   uwsgi_workers=$(( uwsgi_workers < 8 ? uwsgi_workers : 8 ))
 
